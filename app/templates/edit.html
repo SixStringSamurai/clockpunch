@@ -1,0 +1,29 @@
+<!-- This template is called when a user wants to edit his/her profile information -->
+
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Edit Your Profile</h1>
+  <form action="" method="post" name="edit">
+      {{form.hidden_tag()}}
+      <table>
+          <tr>
+              <td>Your nickname:</td>
+              <td>{{ form.nickname(size=24) }}</td>
+          </tr>
+          <tr>
+              <td>Employee Number:</td>
+              <td>{{ form.employee_number(size=24) }}</td>
+          </tr>
+          <tr>
+              <td>Email:</td>
+              <td>{{ form.email(size=48) }}</td>
+          </tr>
+          <tr>
+              <td></td>
+              <td><input type="submit" value="Save Changes"></td>
+          </tr>
+      </table>
+  </form>
+{% endblock %}

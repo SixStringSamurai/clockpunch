@@ -1,0 +1,39 @@
+<!-- This template is for the editing of a clock-punch record -->
+
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Edit this Clock-Punch:</h1>
+  <form action="" method="post" name="punch">
+      {{form.hidden_tag()}}
+      <table>
+          <tr>
+              <td>Employee:</td>
+              <td>{{punch.author.nickname}}</td>
+          </tr>
+          <tr>
+              <td>Employee Number:</td>
+              <td>{{punch.author.employee_number}}</td>
+          </tr>
+          <tr>
+              <td>In or Out:</td>
+              <td>{{punch.in_or_out}}</td>
+          </tr>
+          <tr>
+              <td>Timestamp:</td>
+              <td>{{ form.timestamp(size=48) }}</td>
+          </tr>
+          <tr>
+              <td>Notes:</td>
+              <td>{{ form.notes(size=128) }}</td>
+          </tr>
+          <tr>
+              <td></td>
+              <td><input type="submit" value="Save Changes"></td>
+          </tr>
+      </table>
+  </form>
+
+{% endblock %}

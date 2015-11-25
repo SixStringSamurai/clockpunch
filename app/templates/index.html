@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Hi, {{ user.nickname }}!</h1>
+    <table>
+    <tr>
+      <th>Punch</th>
+      <th>Timestamp</th>
+      <th>Notes</th>
+    </tr>
+    {% for punch in punches %}
+      {% include 'post.html' %}
+    {% endfor %}
+  </table> 
+{% endblock %}

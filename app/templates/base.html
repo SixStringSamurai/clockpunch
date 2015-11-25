@@ -1,0 +1,76 @@
+<!-- this is the template which most other templates extend -->
+
+<html>
+  <style>
+    table, th, td {
+     border: 1px solid black;
+     border-collapse: collapse;
+    }
+    th, td {
+        padding: 5px;
+        text-align: left;
+    }
+  </style>
+  
+  <head>
+    {% if title %}
+    <title>{{ title }} - Punch Clock</title>
+    {% else %}
+    <title>Punch Clock</title>
+    {% endif %}
+    <!-- small script to show local time in an HTML element with id "time"-->
+    <script>  
+      function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        m = checkTime(m);
+        s = checkTime(s);
+        dd = checkTime(dd);
+        mm = checkTime(mm);
+        document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+        document.getElementById('date').innerHTML = mm+'/'+dd+'/'+yyyy;
+        var t = setTimeout(startTime, 500);
+      }
+      function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+      }      
+    </script>
+  </head>
+  
+  <body onload="startTime()">
+
+    <div><h3>Punch Clock</h3>
+        {% if g.user.is_authenticated() %}
+        <a href="{{ url_for('user', nickname=g.user.nickname) }}">Home</a>
+          {% if g.user.is_manager %}
+          | <a href="{{ url_for('timereport') }}">Time Reports</a> 
+          {% endif %}
+        | <a href="{{ url_for('logout') }}">Logout</a> 
+        {% endif %}
+    </div>
+
+
+    <hr>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <b>
+    {% for message in messages %}
+        <p><font color="red">{{ message }}</font></p>
+    {% endfor %}
+    </b>
+    {% endif %}
+    {% endwith %}
+
+     <p>CURRENT TIME: <span id="time"></span></p> 
+     <p>CURRENT DATE: <span id="date"></span></p><hr>
+
+    {% block content %}{% endblock %}
+
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!-- This template lists all clock-punch records for all users, with the most recent punches first -->
+
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<table>
+  <tr>
+  	<th>Employee</th>
+  	<th>Employee Number</th>
+    <th>In or Out</th>
+    <th>Timestamp</th>
+    <th>Notes</th>
+    <th align="center">Edit</th>
+  </tr>
+  {% for punch in punches %}
+    <tr>
+    	<td>{{punch.author.nickname}}</td>
+    	<td>{{punch.author.employee_number}}</td>
+    	<td>{{punch.in_or_out}}</td>
+    	<td>{{punch.timestamp.strftime('%Y-%m-%d %H:%M')}}</td>
+    	<td>{{punch.notes}}</td>
+    	<td align="center"><a href="{{ url_for('punch', punchid=punch.id) }}">edit</a></td>
+    	<!-- need to put link for editing a timepunch here -->
+    </tr>	
+  {% endfor %}
+</table> 
+
+{% endblock %}

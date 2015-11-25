@@ -1,0 +1,13 @@
+<!-- This partial is used by user.html template to allow for clock-punches from a user's landing page upon signin -->
+{% block content %}
+  <h4>Punch in or out:</h4>
+  <form action="" method="post" name="clockpunch">
+      {{form.hidden_tag()}}
+      <table>
+          <tr>Notes: (lunch break, in for the day, 10-min break, etc....)</tr>
+          <tr>{{ form.notes(size=128) }}</tr>
+          <tr><input type="submit" value="Punch Clock"></tr>
+          </tr>
+      </table>
+  </form>
+{% endblock %}
